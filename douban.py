@@ -45,7 +45,7 @@ bro.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
         });
     """
 })
-keyword = '管理咨询'
+keyword = input('管理咨询')
 url = f'https://search.douban.com/book/subject_search?search_text={keyword}&cat=1001/'
 bro.get(url)
 data = []

@@ -19,7 +19,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install selenium
-          python -m pip install fake_useragent
           python -m pip install pandas
           python -m pip install numpy
 

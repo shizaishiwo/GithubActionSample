@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[39]:
-
 
 """
 创建一个浏览器驱动
@@ -13,7 +8,6 @@ from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.edge.service import Service
-from fake_useragent import UserAgent
 from time import sleep
 import pandas as pd
 import numpy as np
@@ -24,13 +18,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 # 指定Edge浏览器驱动的位置
 edge_driver_path = r"D:\jupyter\网络数据爬取\MicrosoftWebDriver.exe"
 
-ua = UserAgent()
-user_agent = ua.random
 
 edge_options = Options()
 edge_options.add_experimental_option("excludeSwitches", ["enable-automation"])
 edge_options.add_experimental_option("useAutomationExtension", False)
-edge_options.add_argument(f'user-agent={user_agent}')
 edge_options.add_argument("--headless")
 edge_options.add_argument("--disable-gpu")
 # 创建并启动Edge浏览器服务对象
@@ -168,5 +159,4 @@ for m in range(120):
         sleep(2)
     except:
         pass
-
 

@@ -18,14 +18,22 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install shutil
-          python -m pip install os
-          python -m pip install numpy
+          # 由于tkinter是Python的标准库，不需要通过pip安装
+          # 这里我们只安装shutil和os，因为它们在代码中被直接导入使用
+          python -m pip install --upgrade pip
+          pip install shutil
+          pip install os
 
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
           python_ver: '3.12'
-          spec: '1.py'
-          upload_exe_with_name: '文件移动'
-          options: --onefile, --name "douban", --windowed
+          spec: 'app.spec'
+          upload_exe_with_name: '文件夹移动.exe'
+          options: --onefile
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: executable
+          path: 文件移动.exe

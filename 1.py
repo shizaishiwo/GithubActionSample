@@ -1,49 +1,51 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
-
-
-"""
-文件夹移动
-"""
-
-import os
 import os
 import shutil
-# 指定文件夹路径
-path = input('请输入原始路径（包括10000文件夹的大路径）')
-destination_path = input('请输入目标文件夹路径')
-# 获取指定路径下所有文件和文件夹
-contents = os.listdir(path)
+from tkinter import Tk, Label, Entry, Button, filedialog
 
-# 仅保留文件夹路径
-folders = [os.path.join(path, item) for item in contents if os.path.isdir(os.path.join(path, item)) ]
+# 创建主窗口
+root = Tk()
+root.title("文件夹移动")
 
-# 遍历每个文件夹
-biaoge = []
-for folder in folders:
-    for file in os.listdir(folder):
-        #if file.endswith('.xlsx'):
-            biaoge.append(os.path.join(folder, file))
+# 创建标签和输入框
+Label(root, text="原始文件夹路径：").pack()
+initial_dir_entry = Entry(root, width=50)
+initial_dir_entry.pack()
 
-print(biaoge)
+Label(root, text="目标文件夹路径：").pack()
+destination_dir_entry = Entry(root, width=50)
+destination_dir_entry.pack()
 
+# 定义浏览文件夹的函数
+def browse_directory():
+    path = filedialog.askdirectory(title='选择原始文件夹路径')
+    initial_dir_entry.delete(0, 'end')
+    initial_dir_entry.insert(0, path)
 
-if not os.path.exists(destination_path):
-    os.makedirs(destination_path)
-# 遍历每个文件路径
-for file_path in biaoge:
-    # 提取文件名
-    file_name = os.path.basename(file_path)
+def browse_destination():
+    path = filedialog.askdirectory(title='选择目标文件夹路径')
+    destination_dir_entry.delete(0, 'end')
+    destination_dir_entry.insert(0, path)
+
+# 定义移动文件和文件夹的函数
+def move_items(src_path, dest_path):
     
-    # 构建目标文件路径
-    destination_file_path = os.path.join(destination_path, file_name)
-    try:
-        # 移动文件
-        shutil.move(file_path, destination_file_path)
-    except:
-        pass
+    for item in os.listdir(src_path):
+        item_src = os.path.join(src_path, item)
+        item_dest = os.path.join(dest_path, item)
+        try:
+            shutil.move(item_src, dest_path)
+        except Exception as e:
+            pass
+    status_label.config(text="文件和文件夹移动完成！", fg="green")
 
-print("文件移动完成！")
 
+# 创建状态标签
+status_label = Label(root, text="", fg="black")
+status_label.pack()
+
+# 创建移动文件按钮
+move_button = Button(root, text="移动文件和文件夹", command=lambda: move_items(initial_dir_entry.get(), destination_dir_entry.get()))
+move_button.pack()
+
+# 运行主循环
+root.mainloop()

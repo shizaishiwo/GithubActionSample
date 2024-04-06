@@ -1,4 +1,4 @@
-name: 豆瓣爬虫Windows版
+name: 文件夹移动
 
 on:
   workflow_dispatch:
@@ -18,14 +18,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install selenium
-          python -m pip install pandas
+          python -m pip install shutil
+          python -m pip install os
           python -m pip install numpy
 
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
           python_ver: '3.12'
-          spec: 'douban.py'
-          upload_exe_with_name: 'douban'
+          spec: '1.py'
+          upload_exe_with_name: '文件移动'
           options: --onefile, --name "douban", --windowed

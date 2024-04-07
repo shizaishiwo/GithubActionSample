@@ -28,7 +28,7 @@ jobs:
         uses: sayyid5416/pyinstaller@v1
         with:
           python_ver: '3.12'
-          spec: 'app.spec'
+          spec: '1.py'
           upload_exe_with_name: '文件夹移动.exe'
           options: --onefile
 

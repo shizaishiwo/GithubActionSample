@@ -18,11 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # 由于tkinter是Python的标准库，不需要通过pip安装
-          # 这里我们只安装shutil和os，因为它们在代码中被直接导入使用
           python -m pip install --upgrade pip
-          pip install shutil
-          pip install os
 
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
@@ -36,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: executable
-          path: 文件移动.exe
+          path: 文件夹移动.exe
